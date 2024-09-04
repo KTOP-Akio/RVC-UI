@@ -20,6 +20,7 @@ import {
   // Dashboard: General
   GeneralAppPage,
   GeneralFilePage,
+  GeneralRiskPage,
   GeneralBankingPage,
   GeneralBookingPage,
   GeneralEcommercePage,
@@ -181,6 +182,7 @@ export default function Router() {
         { path: 'banking', element: <GeneralBankingPage /> },
         { path: 'booking', element: <GeneralBookingPage /> },
         { path: 'file', element: <GeneralFilePage /> },
+        { path: 'risk', element: <GeneralRiskPage /> },
         {
           path: 'e-commerce',
           children: [

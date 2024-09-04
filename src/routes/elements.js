@@ -5,11 +5,11 @@ import LoadingScreen from '../components/loading-screen';
 // ----------------------------------------------------------------------
 
 const Loadable = (Component) => (props) =>
-  (
-    <Suspense fallback={<LoadingScreen />}>
-      <Component {...props} />
-    </Suspense>
-  );
+(
+  <Suspense fallback={<LoadingScreen />}>
+    <Component {...props} />
+  </Suspense>
+);
 
 // ----------------------------------------------------------------------
 
@@ -35,6 +35,7 @@ export const GeneralBookingPage = Loadable(
   lazy(() => import('../pages/dashboard/GeneralBookingPage'))
 );
 export const GeneralFilePage = Loadable(lazy(() => import('../pages/dashboard/GeneralFilePage')));
+export const GeneralRiskPage = Loadable(lazy(() => import('../pages/dashboard/GeneralRiskPage')));
 
 // DASHBOARD: ECOMMERCE
 export const EcommerceShopPage = Loadable(

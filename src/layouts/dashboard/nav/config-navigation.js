@@ -18,6 +18,7 @@ const ICONS = {
   mail: icon('ic_mail'),
   user: icon('ic_user'),
   file: icon('ic_file'),
+  risk: icon('ic_label'),
   lock: icon('ic_lock'),
   label: icon('ic_label'),
   blank: icon('ic_blank'),
@@ -47,6 +48,7 @@ const navConfig = [
       { title: 'banking', path: PATH_DASHBOARD.general.banking, icon: ICONS.banking },
       { title: 'booking', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking },
       { title: 'file', path: PATH_DASHBOARD.general.file, icon: ICONS.file },
+      { title: 'risk', path: PATH_DASHBOARD.general.risk, icon: ICONS.risk },
     ],
   },
 
