@@ -2,11 +2,14 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
 // @mui
-import { Container, Card, CardHeader, Box, IconButton } from '@mui/material';
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import { Container, Card, CardHeader, Box, Button, Grid } from '@mui/material';
+import { DataGrid, GridToolbarColumnsButton, GridToolbarContainer, GridToolbarDensitySelector, GridToolbarExport, GridToolbarFilterButton } from '@mui/x-data-grid';
+// icons
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import SaveIcon from '@mui/icons-material/Save';
+import DeleteIcon from '@mui/icons-material/Delete';
 // components
 import { useSettingsContext } from '../../components/settings';
-import Iconify from '../../components/iconify';
 // _mock_
 import _mock from '../../_mock';
 
@@ -30,7 +33,7 @@ export default function GeneralRiskPage() {
     return (
         <>
             <Helmet>
-                <title> General: Risk | Minimal UI</title>
+                <title>General: Risk | Minimal UI</title>
             </Helmet>
 
             <Container maxWidth={themeStretch ? false : 'xl'}>
@@ -48,23 +51,6 @@ export default function GeneralRiskPage() {
 // ----------------------------------------------------------------------
 
 const columns = [
-    // OPTIONS
-    // https://mui.com/x/api/data-grid/grid-col-def/#main-content
-    // - hide: false (default)
-    // - editable: false (default)
-    // - filterable: true (default)
-    // - sortable: true (default)
-    // - disableColumnMenu: false (default)
-
-    // FIELD TYPES
-    // --------------------
-    // 'string' (default)
-    // 'number'
-    // 'date'
-    // 'dateTime'
-    // 'boolean'
-    // 'singleSelect'
-
     {
         field: 'id',
         hide: true,
@@ -108,20 +94,6 @@ const columns = [
         flex: 1,
         editable: true,
     },
-    {
-        field: 'action',
-        headerName: ' ',
-        align: 'right',
-        width: 80,
-        sortable: false,
-        filterable: false,
-        disableColumnMenu: true,
-        renderCell: (params) => (
-            <IconButton onClick={() => console.log('ID', params.row.id)}>
-                <Iconify icon="eva:more-vertical-fill" />
-            </IconButton>
-        ),
-    },
 ];
 
 // ----------------------------------------------------------------------
@@ -137,6 +109,10 @@ function CustomDataGrid({ data }) {
 
     console.log('SELECTED', selected);
 
+    const onCellChange = (e) => {
+        console.log(e);
+    }
+
     return (
         <DataGrid
             checkboxSelection
@@ -148,8 +124,47 @@ function CustomDataGrid({ data }) {
                 setSelectionModel(newSelectionModel);
             }}
             components={{
-                Toolbar: GridToolbar,
+                Toolbar: GridToolbarCustom,
             }}
+            onCellEditCommit={onCellChange}
         />
+    );
+}
+
+// ----------------------------------------------------------------------
+
+function GridToolbarCustom() {
+
+    const onAddRow = () => {
+        console.log("Add button clicked")
+    };
+    const onSave = () => {
+        console.log("Save button clicked")
+    };
+    const onDelete = () => {
+        console.log("Delete button clicked")
+    };
+
+    return (
+        <GridToolbarContainer>
+            <Grid container item xs>
+                <GridToolbarColumnsButton />
+                <GridToolbarFilterButton />
+                <GridToolbarDensitySelector />
+                <GridToolbarExport />
+            </Grid>
+
+            <Grid>
+                <Button startIcon={<AddCircleIcon />} onClick={onAddRow}>
+                    Add
+                </Button>
+                <Button startIcon={<SaveIcon />} onClick={onSave}>
+                    Save
+                </Button>
+                <Button startIcon={<DeleteIcon />} onClick={onDelete}>
+                    Delete
+                </Button>
+            </Grid>
+        </GridToolbarContainer >
     );
 }
